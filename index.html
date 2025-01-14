@@ -3,12 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Rock, Paper and Scissors </title>
+    <title>Rock, Paper, Scissors</title>
 </head>
 <body>
 
     <script>
         console.log('Hello World!');
+        const words = ["taş", "kağıt", "makas"];
+
+        function getComputerChoice() {
+            const randomIndex = Math.floor(Math.random() * words.length);
+            const chosenWord = words[randomIndex];
+            return chosenWord.charAt(0).toUpperCase() + chosenWord.slice(1).toLowerCase(); 
+            console.log(chosenWord);
+        }
+
+        function getHumanChoice() {
+            while (true) {
+                let userInput = prompt("Taş, Kağıt ya da Makas?");
+                if (userInput) {
+                    let formattedChoice = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
+                    if (["Taş", "Kağıt", "Makas"].includes(formattedChoice)) {
+                        return formattedChoice;
+                    }
+                }
+                console.error("Sadece Taş, Kağıt ya da Makas yazabilirsiniz!");
+            }
+        }
+
+        var humanScore = 0;
+        var computerScore = 0;
+
+        function playRound(humanChoice, computerChoice) {
+            if (humanChoice === computerChoice) {
+                console.log("Berabere!");
+            } else if ((humanChoice === "Taş" && computerChoice === "Kağıt") ||
+                       (humanChoice === "Kağıt" && computerChoice === "Makas") ||
+                       (humanChoice === "Makas" && computerChoice === "Taş")) {
+                console.log(`Kaybettin! ${computerChoice} seni yener!`);
+                computerScore++;
+            } else {
+                console.log(`Kazandın! ${humanChoice} ${computerChoice}'yi yener!`);
+                humanScore++;
+            }
+        }
+
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+
+        console.log(`Senin seçimin: ${humanSelection}`);
+        console.log(`Bilgisayarın seçimi: ${computerSelection}`);
+
+        playRound(humanSelection, computerSelection);
+
+        console.log(`Senin Skorun: ${humanScore}`);
+        console.log(`Bilgisayarın Skoru: ${computerScore}`);
+
     </script>
     
 </body>

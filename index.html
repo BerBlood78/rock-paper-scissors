@@ -37,15 +37,25 @@
         function playRound(humanChoice, computerChoice) {
             if (humanChoice === computerChoice) {
                 console.log("Berabere!");
-            } else if ((humanChoice === "Taş" && computerChoice === "Kağıt") ||
-                       (humanChoice === "Kağıt" && computerChoice === "Makas") ||
-                       (humanChoice === "Makas" && computerChoice === "Taş")) {
-                console.log(`Kaybettin! ${computerChoice} seni yener!`);
+            } else if (humanChoice === "Taş" && computerChoice === "Kağıt") {
+                console.log(`Kaybettin! ${computerChoice} ${humanChoice}'ı sarar!`);
                 computerScore++;
-            } else {
-                console.log(`Kazandın! ${humanChoice} ${computerChoice}'yi yener!`);
+            } else if (humanChoice === "Taş" && computerChoice === "Makas") {
+                console.log(`Kazandın! ${humanChoice} ${computerChoice}'ı kırar!`);
                 humanScore++;
-            }
+            } else if (humanChoice === "Kağıt" && computerChoice === "Makas") {
+                console.log(`Kaybettin! ${computerChoice} ${humanChoice}'ı keser!`);
+                computerScore++;
+            } else if (humanChoice === "Kağıt" && computerChoice === "Taş") {
+                console.log(`Kazandın! ${humanChoice} ${computerChoice}'ı sarar!`);
+                humanScore++;
+            } else if (humanChoice === "Makas" && computerChoice === "Taş") {
+                console.log(`Kaybettin! ${computerChoice} ${humanChoice}'ı kırar!`);
+                computerScore++;
+            } else if (humanChoice === "Makas" && computerChoice === "Kağıt") {
+                console.log(`Kazandın! ${humanChoice} ${computerChoice}'ı keser!`);
+                humanScore++;
+            } 
         }
 
         const humanSelection = getHumanChoice();

@@ -9,13 +9,14 @@
 
     <script>
         console.log('Hello World!');
+        console.log("Başlamak için: playGame()");
+
         const words = ["taş", "kağıt", "makas"];
 
         function getComputerChoice() {
             const randomIndex = Math.floor(Math.random() * words.length);
             const chosenWord = words[randomIndex];
-            return chosenWord.charAt(0).toUpperCase() + chosenWord.slice(1).toLowerCase(); 
-            console.log(chosenWord);
+            return chosenWord.charAt(0).toUpperCase() + chosenWord.slice(1).toLowerCase();
         }
 
         function getHumanChoice() {
@@ -27,14 +28,14 @@
                         return formattedChoice;
                     }
                 }
-                console.error("Sadece Taş, Kağıt ya da Makas yazabilirsiniz!");
+                console.error("Sadece taş, kağıt ya da makas yazabilirsin!");
             }
         }
 
-        var humanScore = 0;
-        var computerScore = 0;
+        let humanScore = 0;
+        let computerScore = 0;
 
-        function playRound(humanChoice, computerChoice) {
+        function playRound(humanChoice = getHumanChoice(), computerChoice = getComputerChoice()) {
             if (humanChoice === computerChoice) {
                 console.log("Berabere!");
             } else if (humanChoice === "Taş" && computerChoice === "Kağıt") {
@@ -58,17 +59,25 @@
             } 
         }
 
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
+        function playGame() {
+            for (let i = 0; i < 100; i++) {
+                playRound();
 
-        console.log(`Senin seçimin: ${humanSelection}`);
-        console.log(`Bilgisayarın seçimi: ${computerSelection}`);
-
-        playRound(humanSelection, computerSelection);
-
-        console.log(`Senin Skorun: ${humanScore}`);
-        console.log(`Bilgisayarın Skoru: ${computerScore}`);
-
+                if (humanScore === 5) {
+                    console.log("Kazandın! Tekrar oynamak için playGame().");
+                    console.log(`Skorun: ${humanScore}, Bilgisayarın skoru: ${computerScore}`);
+                    humanScore = 0;
+                    computerScore = 0;
+                    break;
+                } else if (computerScore === 5) {
+                    console.log("Kaybettin! Tekrar oynamak için playGame().");
+                    console.log(`Skorun: ${humanScore}, Bilgisayarın skoru: ${computerScore}`);
+                    humanScore = 0;
+                    computerScore = 0;
+                    break;
+                }
+            }
+        }
     </script>
     
 </body>
